@@ -8,6 +8,7 @@ import com.myexcample.testscreensize.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -27,6 +28,24 @@ public class MainActivity extends Activity {
 		Log.d("debug", "heightDip:" + heightDip);
 		int widthDip = ResolutionConvertor.changePixelToDip(widthPixels, dpi);
 		Log.d("debug", "widthDip:" + widthDip);
+
+		TextView showHeightPixel = (TextView) findViewById(R.id.showHeightPixel);
+		TextView showWidthPixel = (TextView) findViewById(R.id.showWidthPixel);
+		TextView showHeightDip = (TextView) findViewById(R.id.showHeightDip);
+		TextView showWidthDip = (TextView) findViewById(R.id.showWidthDip);
+		showHeightPixel.setText("Height: " + heightPixels + "(px)\t");
+		showWidthPixel.setText("Width: " + widthPixels + "(px)\t");
+		showHeightDip.setText("Height: " + heightDip + "(dp)\t");
+		showWidthDip.setText("Width: " + widthDip + "(dp)\t");
+		
+		int changedHeightPixel = ResolutionConvertor.ChangeDipToPixel(this, heightDip);
+		int changedWidthPixel = ResolutionConvertor.ChangeDipToPixel(this, widthDip);
+
+		TextView HeightDipToPixel = (TextView) findViewById(R.id.HeightDipToPixel);
+		TextView WidthDipToPixel = (TextView) findViewById(R.id.WidthDipToPixel);
+
+		HeightDipToPixel.setText("Height Dip convert to Pixel: " + changedHeightPixel + "(px)\t");
+		WidthDipToPixel.setText("Width Dip convert to Pixel: " + changedWidthPixel + "(px)\t");
 
 	}
 

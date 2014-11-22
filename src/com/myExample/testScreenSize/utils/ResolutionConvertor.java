@@ -1,8 +1,8 @@
 package com.myExample.testScreenSize.utils;
 
-import android.R.integer;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 
 public class ResolutionConvertor {
 	public static int dpi;
@@ -14,7 +14,13 @@ public class ResolutionConvertor {
 	}
 
 	public static int changePixelToDip(int px, int dpi) {
-		int dip = px * 160 / dpi;
+		int dip = px / dpi;
 		return dip;
+	}
+
+	public static int ChangeDipToPixel(Context context, int dip) {
+		int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip,
+				context.getResources().getDisplayMetrics());
+		return px;
 	}
 }

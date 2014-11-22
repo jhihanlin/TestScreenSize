@@ -1,18 +1,14 @@
 package com.myExample.testScreenSize.utils;
 
-import android.R.integer;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
-@SuppressLint("NewApi")
 public class ScreenSizeHelper {
 
 	public static ScreenSize getScreenSize(Context context) {
@@ -61,7 +57,7 @@ public class ScreenSizeHelper {
 		public int heightPixels;
 		public int actionBarSize;
 		public int statusBarSize;
-		
+
 	}
 
 	public static ScreenSize getScreenSize2(Activity activity) {
