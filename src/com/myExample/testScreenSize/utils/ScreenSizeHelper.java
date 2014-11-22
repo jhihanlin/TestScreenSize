@@ -22,6 +22,7 @@ public class ScreenSizeHelper {
 
 		Display display = wm.getDefaultDisplay();
 		DisplayMetrics metrics = new DisplayMetrics();
+
 		display.getMetrics(metrics);
 
 		int width = metrics.widthPixels;
@@ -33,43 +34,47 @@ public class ScreenSizeHelper {
 		// get action bar height
 		final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
 				new int[] { android.R.attr.actionBarSize });
-		int mActionBarSize = (int) styledAttributes.getDimension(0, 0);
+		int actionBarSize = (int) styledAttributes.getDimension(0, 0);
 		styledAttributes.recycle();
-		Log.d("debug", "mActionBarSize" + mActionBarSize);
+		Log.d("debug", "actionBarSize" + actionBarSize);
 
 		// get status bar height
-		int mStatusBarSize = 0;
+		int statusBarSize = 0;
 		int statusId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
 		if (statusId > 0) {
-			mStatusBarSize = context.getResources().getDimensionPixelSize(statusId);
-			Log.d("debug", "mStatusBarSize" + mStatusBarSize);
+			statusBarSize = context.getResources().getDimensionPixelSize(statusId);
+			Log.d("debug", "statusBarSize" + statusBarSize);
 		}
 
-		height = height - mActionBarSize - mStatusBarSize;
+		height = height - actionBarSize - statusBarSize;
 
 		ScreenSize screenSize = new ScreenSize();
 		screenSize.heightPixels = height;
 		screenSize.widthPixels = width;
-		screenSize.mActionBarSize = mActionBarSize;
-		screenSize.mStatusBarSize = mStatusBarSize;
+		screenSize.actionBarSize = actionBarSize;
+		screenSize.statusBarSize = statusBarSize;
 		return screenSize;
 	}
 
 	public static class ScreenSize {
 		public int widthPixels;
 		public int heightPixels;
-		public int mActionBarSize;
-		public int mStatusBarSize;
-
+		public int actionBarSize;
+		public int statusBarSize;
+		
 	}
 
 	public static ScreenSize getScreenSize2(Activity activity) {
+		// current activity view not include action bar and status bar
 		View view = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-		int height = view.getHeight();
-		int width = view.getWidth();
+		// include action bar and status bar
+		// View view = activity.getWindow().getDecorView().getRootView();
+		int height2 = view.getHeight();
+		int width2 = view.getWidth();
+
 		ScreenSize screenSize = new ScreenSize();
-		screenSize.heightPixels = height;
-		screenSize.widthPixels = width;
+		screenSize.heightPixels = height2;
+		screenSize.widthPixels = width2;
 		return screenSize;
 	}
 }
